@@ -1,1 +1,1 @@
-�ResponseSaveTestimony{date = '02-2020',consumed = 'Consumed{coldWater = '10',gas = '10',electricity = '10',hotWater = '10'}',cost = 'Cost{coldWater = '10500.0',gas = '1240.0',electricity = '1.2412412E8',hotWater = '1230.0'}',faultcode = 'Faultcode{resultText = 'success',resultCode = '0'}',previousDate = '01-2020',totalCost = '1.2413709E8'}
+@Успешное поключение к базе данных

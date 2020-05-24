@@ -3,9 +3,12 @@ package ru.vtb.neoflex.autotests;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import ru.neoflex.controllers.RequestTestController;
+import ru.neoflex.dao.MySqlConnector;
 import ru.neoflex.model.CurrentTestimony;
 import ru.neoflex.model.RequestSaveTestimony;
 import ru.neoflex.model.ResponseSaveTestimony;
+
+import java.sql.ResultSet;
 
 public class SaveTestimonyTest {
     @Test
@@ -49,6 +52,26 @@ public class SaveTestimonyTest {
         Assertions.assertEquals("0", resultCode);
         Assertions.assertEquals("success", resultText);
 
+
+        try {
+            ResultSet expectedResult = MySqlConnector.selectAllFromBilling(requestSaveTestimony.getDate());
+            while (expectedResult.next()) {
+                String date = expectedResult.getString("currentmonth");
+                double coldWater = expectedResult.getDouble("coldWater");
+                double hotWater = expectedResult.getDouble("hotWater");
+                double gas = expectedResult.getDouble("gas");
+                double electricity  = expectedResult.getDouble("electricity");
+
+                Assertions.assertEquals(date, requestSaveTestimony.getDate());
+                Assertions.assertEquals(coldWater, requestSaveTestimony.getCurrentTestimony().getColdWater());
+                Assertions.assertEquals(hotWater, requestSaveTestimony.getCurrentTestimony().getHotWater());
+                Assertions.assertEquals(gas, requestSaveTestimony.getCurrentTestimony().getGas());
+                Assertions.assertEquals(electricity, requestSaveTestimony.getCurrentTestimony().getElectricity());
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 }
