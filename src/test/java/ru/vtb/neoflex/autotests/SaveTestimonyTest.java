@@ -1,35 +1,38 @@
 package ru.vtb.neoflex.autotests;
 
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import ru.neoflex.controllers.RequestTestController;
 import ru.neoflex.dao.MySqlConnector;
 import ru.neoflex.model.CurrentTestimony;
 import ru.neoflex.model.RequestSaveTestimony;
 import ru.neoflex.model.ResponseSaveTestimony;
 
+import java.io.IOException;
 import java.sql.ResultSet;
+import java.util.Iterator;
+
+import static ru.vtb.neoflex.autotests.TestBase.validRequestSave;
 
 public class SaveTestimonyTest {
-    @Test
-    public void checkCodeSuccessTest(){
-        String saveTestimonyURI = "http://localhost:8080/services/testimony/save";
-        RequestSaveTestimony requestSaveTestimony = new RequestSaveTestimony();
-        CurrentTestimony currentTestimony = new CurrentTestimony();
+    String saveTestimonyURI = "http://localhost:8080/services/testimony/save";
 
-        requestSaveTestimony.setDate("02-2020");
-        currentTestimony.setColdWater(20);
-        currentTestimony.setHotWater(30);
-        currentTestimony.setGas(40);
-        currentTestimony.setElectricity(50);
-        requestSaveTestimony.setCurrentTestimony(currentTestimony);
+    public static Iterator<Object[]> dataRead() throws IOException {
+        String requestFile = "src/test/resources/SaveTestimonyTest.json";
+        return validRequestSave(requestFile);
+    }
 
+    @MethodSource("dataRead")
+    @ParameterizedTest
+    public void checkCodeSuccessTest(RequestSaveTestimony requestSaveTestimony) {
         int actualStatusCode = RequestTestController.getRequestCode(saveTestimonyURI, requestSaveTestimony);
-
-        System.out.print("saveTestimony return code: " + actualStatusCode);
-
         Assertions.assertEquals(200, actualStatusCode);
     }
+
+
+
     @Test
     public void checkFaultCodeSuccessTest(){
         String saveTestimonyURI = "http://localhost:8080/services/testimony/save";
@@ -74,4 +77,6 @@ public class SaveTestimonyTest {
         }
 
     }
+
+
 }

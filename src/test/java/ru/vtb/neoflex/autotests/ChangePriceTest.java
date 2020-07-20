@@ -2,55 +2,48 @@ package ru.vtb.neoflex.autotests;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import ru.neoflex.controllers.RequestTestController;
 import ru.neoflex.dao.MySqlConnector;
 import ru.neoflex.model.Price;
 import ru.neoflex.model.RequestPutPrice;
 import ru.neoflex.model.ResponsePutPrice;
 
+import java.io.IOException;
 import java.sql.ResultSet;
+import java.util.Iterator;
+
+import static ru.vtb.neoflex.autotests.TestBase.validRequestChange;
 
 public class ChangePriceTest {
-    @Test
-    public void checkCodeSuccessTest(){
-        String changePriceTestimonyURI = "http://localhost:8080/services/testimony/changePrice";
-        RequestPutPrice requestPutPrice = new RequestPutPrice();
-        Price price = new Price();
-
-        price.setPriceColdWater(1050);
-        price.setPriceHotWater(123);
-        price.setPriceGas(124);
-        price.setPriceElectricity(12412412);
-        requestPutPrice.setPrice(price);
-
-        int actualStatusCode = RequestTestController.getRequestCode(changePriceTestimonyURI, requestPutPrice);
-
-        System.out.print("changePrice return code: " + actualStatusCode);
-
-        Assertions.assertEquals(200, actualStatusCode);
-
+    String changePriceTestimonyURI = "http://localhost:8080/services/testimony/changePrice";
+    public static Iterator<Object[]> changePrice() throws IOException{
+        String request = "src/test/resources/ChangePriceTest.json";
+        return validRequestChange(request);
     }
-    @Test
-    public void checkFaultCodeSuccessTest(){
-        String changePriceTestimonyURI = "http://localhost:8080/services/testimony/changePrice";
-        RequestPutPrice requestPutPrice = new RequestPutPrice();
-        Price price = new Price();
 
-        price.setPriceColdWater(1050);
-        price.setPriceHotWater(123);
-        price.setPriceGas(124);
-        price.setPriceElectricity(12412412);
-        requestPutPrice.setPrice(price);
+    @MethodSource("changePrice")
+    @ParameterizedTest
+    public void checkCodeSuccessTest(RequestPutPrice requestPutPrice){
+        int codeResponse = RequestTestController.getRequestCode(changePriceTestimonyURI, requestPutPrice);
+        Assertions.assertEquals(200,codeResponse);
+    }
+
+
+
+    @MethodSource("changePrice")
+    @ParameterizedTest
+    public void checkFaultCodeSuccessTest(RequestPutPrice requestPutPrice){
 
         ResponsePutPrice responsePutPrice = RequestTestController.getResponseBodyPutPrice(changePriceTestimonyURI, requestPutPrice);
         String resultCode = responsePutPrice.getResultCode();
         String resultText = responsePutPrice.getResultText();
-        //Тут проявлю инициативу и выведу полностью тело ответа, коли у него так красиво описан toString :)
-        System.out.println(responsePutPrice);
         Assertions.assertEquals("0", resultCode);
         Assertions.assertEquals("success", resultText);
 
     }
+
     @Test
     public void checkSaveDataInDbPriceGuide(){
         String changePriceTestimonyURI = "http://localhost:8080/services/testimony/changePrice";

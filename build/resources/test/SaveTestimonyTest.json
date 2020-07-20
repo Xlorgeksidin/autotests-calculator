@@ -1,0 +1,20 @@
+[
+  {
+    "date": "05-2020",
+    "currentTestimony": {
+      "coldWater": 20,
+      "hotWater": 30,
+      "gas": 40,
+      "electricity": 50
+    }
+  },
+  {
+    "date": "06-2020",
+    "currentTestimony": {
+      "coldWater": 21,
+      "hotWater": 31,
+      "gas": 41,
+      "electricity": 51
+    }
+  }
+]

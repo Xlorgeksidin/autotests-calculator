@@ -1,0 +1,26 @@
+[
+  {
+    "price": {
+      "priceColdWater": 1005,
+      "priceHotWater": 100,
+      "priceGas": 120,
+      "priceElectricity": 2
+    }
+  },
+  {
+    "price": {
+      "priceColdWater": 1,
+      "priceHotWater": 100,
+      "priceGas": 120,
+      "priceElectricity": 2
+    }
+  },
+  {
+    "price": {
+      "priceColdWater": 1,
+      "priceHotWater": 100,
+
+      "priceElectricity": 2
+    }
+  }
+]
