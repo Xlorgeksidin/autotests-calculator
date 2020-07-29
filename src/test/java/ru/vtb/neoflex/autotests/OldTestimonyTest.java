@@ -35,7 +35,7 @@ public class OldTestimonyTest {
         Assertions.assertEquals("0", resultCode);
         Assertions.assertEquals("success", resultText);
         Assertions.assertEquals("02-2020", date);
-        Assertions.assertEquals(1.2412412E8, electricity);
+        Assertions.assertEquals(20.0, electricity);
 
     }
     @Test

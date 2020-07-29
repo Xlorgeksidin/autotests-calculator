@@ -20,4 +20,30 @@ dependencies {
     compile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.7.0-M1'
     compile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0-M1'
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.20'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0-M1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0-M1'
+    testCompileOnly 'junit:junit:4.12'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.3.1'
+}
+/*Вот тут есть такая особенность.
+Мы не можем запустить параметризованные тесты без блока test.
+При этом, для запуска параметризованных тестов нужны следующие расширения:
+testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0-M1'
+testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0-M1'
+а
+в блоке test должна использоваться платформа useJUnitPlatform()
+Однако, при таких настройках будут запущены только параметризованные тесты, а остальные будут пропущены.
+Если, в блоке test указать useJUnit(), то будут запущены только НЕпараметризованные тесты.
+UPD:
+Эврика, решение нашлось!
+Для запуска всех тестов из сборщика нужно в dependencies указать:
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0-M1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0-M1'
+    testCompileOnly 'junit:junit:4.12'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.3.1'
+а в
+    test указать useJUnitPlatform()
+ */
+test{
+    useJUnitPlatform()
 }

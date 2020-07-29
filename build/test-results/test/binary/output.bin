@@ -1,0 +1,2 @@
+@Успешное поключение к базе данных
+oldTestimony return code: 200�ResponseSaveTestimony{date = '02-2020',consumed = 'Consumed{coldWater = '10',gas = '10',electricity = '10',hotWater = '10'}',cost = 'Cost{coldWater = '540.0',gas = '1200.0',electricity = '20.0',hotWater = '1020.0'}',faultcode = 'Faultcode{resultText = 'success',resultCode = '0'}',previousDate = '01-2020',totalCost = '2780.0'}
