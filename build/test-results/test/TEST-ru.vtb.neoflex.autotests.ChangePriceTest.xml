@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.vtb.neoflex.autotests.ChangePriceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2020-07-29T08:16:30" hostname="DESKTOP-BJK38MV" time="1.673">
+  <properties/>
+  <testcase name="checkCodeSuccessTest(RequestPutPrice)[1]" classname="ru.vtb.neoflex.autotests.ChangePriceTest" time="1.215"/>
+  <testcase name="checkCodeSuccessTest(RequestPutPrice)[2]" classname="ru.vtb.neoflex.autotests.ChangePriceTest" time="0.028"/>
+  <testcase name="checkCodeSuccessTest(RequestPutPrice)[3]" classname="ru.vtb.neoflex.autotests.ChangePriceTest" time="0.025"/>
+  <testcase name="checkFaultCodeSuccessTest(RequestPutPrice)[1]" classname="ru.vtb.neoflex.autotests.ChangePriceTest" time="0.047"/>
+  <testcase name="checkFaultCodeSuccessTest(RequestPutPrice)[2]" classname="ru.vtb.neoflex.autotests.ChangePriceTest" time="0.021"/>
+  <testcase name="checkFaultCodeSuccessTest(RequestPutPrice)[3]" classname="ru.vtb.neoflex.autotests.ChangePriceTest" time="0.025"/>
+  <testcase name="checkSaveDataInDbPriceGuide" classname="ru.vtb.neoflex.autotests.ChangePriceTest" time="0.283"/>
+  <system-out><![CDATA[Успешное поключение к базе данных
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

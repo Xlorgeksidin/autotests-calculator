@@ -15,6 +15,27 @@ import java.sql.ResultSet;
 import java.util.Iterator;
 
 import static ru.vtb.neoflex.autotests.TestBase.validRequestChange;
+/*В настройках Gradle такая особенность, которая блочит запуск тестов из Gradle.
+Следующий текст относится к настроечному файлу build.gradle(т.к. комменты на русском языке в нем не отображаются корректно)
+Мы не можем запустить параметризованные тесты без блока test.
+При этом, для запуска параметризованных тестов нужны следующие расширения:
+testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0-M1'
+testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0-M1'
+а
+в блоке test должна использоваться платформа useJUnitPlatform()
+Однако, при таких настройках будут запущены только параметризованные тесты, а остальные будут пропущены.
+Если, в блоке test указать useJUnit(), то будут запущены только НЕпараметризованные тесты.
+
+UPD:
+Эврика, решение нашлось!
+Для запуска всех тестов из сборщика нужно в dependencies указать:
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0-M1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0-M1'
+    testCompileOnly 'junit:junit:4.12'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.3.1'
+а в
+    test указать useJUnitPlatform()
+ */
 
 public class ChangePriceTest {
     String changePriceTestimonyURI = "http://localhost:8080/services/testimony/changePrice";
